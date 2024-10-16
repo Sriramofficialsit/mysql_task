@@ -1,6 +1,10 @@
+-- Creating databse with name ecommerce
 CREATE DATABASE ecommerce;
+
+-- Currently Using ecommerce Database
 USE ecommerce;
 
+-- Creating Table With Name customers
 CREATE TABLE customers (
 id INT AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
@@ -8,6 +12,7 @@ email VARCHAR(100) NOT NULL UNIQUE,
 address VARCHAR(100) NOT NULL
 );
 
+-- Creating Table With Name orders
 CREATE TABLE orders(
 id INT AUTO_INCREMENT PRIMARY KEY,
 customer_id INT,
@@ -16,6 +21,7 @@ total_amount DECIMAL(10,2) NOT NULL,
 FOREIGN KEY (customer_id) REFERENCES customers(id)
 )
 
+-- Creating Table With Name product
 CREATE TABLE product(
 id INT AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
@@ -23,6 +29,7 @@ price DECIMAL(10,2) NOT NULL,
 description TEXT
 );
 
+-- Inserting Sample Datas To customers Table
 INSERT INTO customers (name, email, address) VALUES 
 ('SRIRAM', 'sriramofficial.sit@gmail.com', 'Trichy'),
 ('KATHAR BASHA', 'katharofficial@gmail.com', 'Namakkal'),
@@ -30,6 +37,7 @@ INSERT INTO customers (name, email, address) VALUES
 ('RAM', 'ramofficial.sit@gmail.com', 'Trichy'),
 ('AJEY', 'ajeyofficial@gmail.com', 'Salem');
 
+-- Inserting Sample Datas To product Table
 INSERT INTO product (name, price, description) VALUES 
 ('Product A', 30.00, 'Description of Product A'),
 ('Product B', 150.00, 'Description of Product B'),
@@ -37,6 +45,7 @@ INSERT INTO product (name, price, description) VALUES
 ('Product D', 30.00, 'Description of Product D'),
 ('Product E', 50.00, 'Description of Product E');
 
+-- Inserting Sample Datas To orders Table
 INSERT INTO orders (customer_id, order_date, total_amount) VALUES
 (1, CURDATE(), 80.00),
 (2, CURDATE() - INTERVAL 10 DAY, 150.00),
@@ -45,6 +54,7 @@ INSERT INTO orders (customer_id, order_date, total_amount) VALUES
 (5, CURDATE() - INTERVAL 35 DAY, 30.00),
 (1, CURDATE() - INTERVAL 35 DAY, 80.00);
 
+-- Viewing Above Created Tables
 SELECT * FROM customers;
 SELECT * FROM product;
 SELECT * FROM orders;
@@ -72,9 +82,6 @@ ALTER TABLE product ADD COLUMN discount DECIMAL(5,2) DEFAULT 0;
 --  Retrieve the top 3 products with the highest price.
 
 SELECT * FROM product ORDER BY price DESC LIMIT 3;
-
-
-
 
 -- Join the orders and customers tables to retrieve the customer's name and order date for each order.
 
